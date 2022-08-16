@@ -1,0 +1,91 @@
+@import url(https://fonts.googleapis.com/css?family=Manrope:200,300,regular,500,600,700,800);
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+
+* {
+  font-family: "Manrope", sans-serif;
+}
+body {
+  background-color: #ecf2f5;
+}
+/* Cover Image */
+.cover_image {
+  width: 2400px;
+  height: 1350px;
+  overflow: hidden !important;
+}
+
+.Poppins {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.pop-anim {
+  animation: pop-anim 350ms;
+}
+
+@keyframes pop-anim {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.07);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.glassmorphism-2 {
+  background: linear-gradient(to bottom, #fff, #2563eb10);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.shiny-button {
+  overflow: hidden;
+  outline: none;
+  transition: all 0.2s ease;
+}
+.shiny-button:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -200%;
+  width: 200%;
+  height: 100%;
+  transform: skewX(-20deg);
+  animation: shine 1.3s ease infinite;
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+}
+.shiny-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+@-moz-keyframes shine {
+  100% {
+    left: 200%;
+  }
+}
+@-webkit-keyframes shine {
+  100% {
+    left: 200%;
+  }
+}
+@-o-keyframes shine {
+  100% {
+    left: 200%;
+  }
+}
+@keyframes shine {
+  100% {
+    left: 200%;
+  }
+}
