@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import {
   FiArrowDownCircle,
   FiArrowLeft,
@@ -15,13 +15,13 @@ import {
   FiUpload,
   FiUploadCloud,
   FiX,
-} from "react-icons/fi";
-import { BsShieldShaded, BsTrophy, BsUpload } from "react-icons/bs";
-import { MdOutlineAccountCircle } from "react-icons/md";
-import { AiOutlineTrophy, AiTwotoneLock } from "react-icons/ai";
-import { FaBars } from "react-icons/fa";
-import { Button, Rnd } from "..";
-import { BiCommand } from "react-icons/bi";
+} from 'react-icons/fi';
+import { BsShieldShaded, BsTrophy, BsUpload } from 'react-icons/bs';
+import { MdOutlineAccountCircle } from 'react-icons/md';
+import { AiOutlineTrophy, AiTwotoneLock } from 'react-icons/ai';
+import { FaBars } from 'react-icons/fa';
+import { Button, Rnd } from '..';
+import { BiCommand } from 'react-icons/bi';
 
 const Main = ({
   data,
@@ -33,8 +33,8 @@ const Main = ({
 }) => {
   // resize cover image to fit the view
   const resizeCoverImage = () => {
-    const cover_image = document.querySelector("#cover_image_preview");
-    const container = document.querySelector(".container");
+    const cover_image = document.querySelector('#cover_image_preview');
+    const container = document.querySelector('.container');
 
     // get width and height of cover_image
     const maxWidth = cover_image.offsetWidth;
@@ -48,7 +48,7 @@ const Main = ({
 
     // early exit
     if (width >= maxWidth && height >= maxHeight) {
-      cover_image.style.transform = "";
+      cover_image.style.transform = '';
       return;
     }
 
@@ -61,7 +61,7 @@ const Main = ({
   useEffect(() => {
     resizeCoverImage();
 
-    window.addEventListener("resize", resizeCoverImage);
+    window.addEventListener('resize', resizeCoverImage);
 
     var IMAGE_MIME_REGEX = /^image\/(p?jpeg|gif|png)$/i;
 
@@ -182,7 +182,7 @@ const Main = ({
                 </div>
               )}
 
-              {data.mockup === "normal" && (
+              {data.mockup === 'normal' && (
                 <div className="px-8 py-6 bg-[#EDF2F7] w-[1800px]">
                   <div className="flex items-center">
                     <div className="rounded-full h-[25px] w-[25px] bg-red-500 mx-2"></div>
@@ -191,7 +191,7 @@ const Main = ({
                   </div>
                 </div>
               )}
-              {data.mockup === "firefox" && (
+              {data.mockup === 'firefox' && (
                 <div className="w-[1800px]">
                   <div className="bg-[#565656] w-full flex items-center pl-8">
                     <div className="my-5 rounded-full h-[25px] w-[25px] bg-red-500 mx-2"></div>
@@ -220,7 +220,7 @@ const Main = ({
                   </div>
                 </div>
               )}
-              {data.mockup === "chrome" && (
+              {data.mockup === 'chrome' && (
                 <div className="w-[1800px]">
                   <div className="bg-[#DFE1E5] w-full flex items-center pl-8">
                     <div className="my-5 rounded-full h-[25px] w-[25px] bg-red-500 mx-2"></div>
@@ -254,7 +254,7 @@ const Main = ({
                   </div>
                 </div>
               )}
-              {data.mockup === "macOS" && (
+              {data.mockup === 'macOS' && (
                 <div className="px-8 py-6 bg-[#EDF2F7] w-[1800px] text-[#666]">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
@@ -282,7 +282,7 @@ const Main = ({
               )}
 
               <img
-                src={imgBlob ? imgBlob : "/white.png"}
+                src={imgBlob ? imgBlob : '/white.png'}
                 alt="Screenshot"
                 className="w-[1800px] border-t border-[#ccc] mt-[-1px]"
               />
@@ -301,7 +301,7 @@ const Main = ({
             width={37}
             alt="Wave"
             className="mr-2"
-          />{" "}
+          />{' '}
           Iframe
         </h1>
         <p className="text-blue-500 text-semibold mb-1 text-xs">

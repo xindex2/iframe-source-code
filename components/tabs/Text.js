@@ -1,24 +1,24 @@
-import React, { useState } from "react";
-import { HexColorPicker } from "react-colorful";
-import toast from "react-hot-toast";
-import { FiType } from "react-icons/fi";
-import { Button } from "..";
+import React, { useState } from 'react';
+import { HexColorPicker } from 'react-colorful';
+import toast from 'react-hot-toast';
+import { FiType } from 'react-icons/fi';
+import { Button } from '..';
 
 const Text = ({ children, setChildren }) => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
-  const [color, setColor] = useState("#000000");
+  const [color, setColor] = useState('#000000');
 
   // styles to make the sketchbar pop over
   const popover = {
-    position: "absolute",
-    zIndex: "12",
+    position: 'absolute',
+    zIndex: '12',
   };
   const cover = {
-    position: "fixed",
-    top: "0px",
-    right: "0px",
-    bottom: "0px",
-    left: "0px",
+    position: 'fixed',
+    top: '0px',
+    right: '0px',
+    bottom: '0px',
+    left: '0px',
   };
 
   const textArray = [
@@ -77,8 +77,8 @@ const Text = ({ children, setChildren }) => {
   return (
     <div className="p-7 overflow-x-hidden">
       <div className="flex items-center">
-        <FiType className="text-3xl  text-[#666] bg-gray-100 p-1 rounded-md" />{" "}
-        <h2 className="text-2xl ml-2 font-[500]  text-[#666]">Text</h2>{" "}
+        <FiType className="text-3xl  text-[#666] bg-gray-100 p-1 rounded-md" />{' '}
+        <h2 className="text-2xl ml-2 font-[500]  text-[#666]">Text</h2>{' '}
       </div>
       <div className="bg-[#cccccc] mt-2 rounded-xl w-full h-[1px] mb-6"></div>
       <div className="flex items-center mt-4">

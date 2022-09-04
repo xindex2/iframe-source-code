@@ -1,8 +1,8 @@
-import { Slider, Tooltip } from "@mui/material";
-import React from "react";
-import toast from "react-hot-toast";
-import { FiMapPin, FiRotateCw } from "react-icons/fi";
-import { Button } from "..";
+import { Slider, Tooltip } from '@mui/material';
+import React from 'react';
+import toast from 'react-hot-toast';
+import { FiMapPin, FiRotateCw } from 'react-icons/fi';
+import { Button } from '..';
 
 const Position = ({ data, setData }) => {
   const handleSquarePicker = (x, y) => {
@@ -19,41 +19,41 @@ const Position = ({ data, setData }) => {
   return (
     <div className="p-7 overflow-x-hidden">
       <div className="flex items-center">
-        <FiMapPin className="text-2xl  text-[#666]" />{" "}
-        <h2 className="text-2xl ml-2 font-[500]  text-[#666]">Position</h2>{" "}
+        <FiMapPin className="text-2xl  text-[#666]" />{' '}
+        <h2 className="text-2xl ml-2 font-[500]  text-[#666]">Position</h2>{' '}
       </div>
       <div className="bg-[#cccccc] mt-2 rounded-xl w-full h-[1px] mb-6"></div>
       <div className="bg-[#EEF3F9] rounded-2xl flex items-center justify-between text-[#444] capitalize font-semibold border-2 border-[#00000010] flex-col overflow-hidden">
         <div className="flex items-center justify-between w-[110%] mt-[-15px]">
-          <Button onClick={() => handleSquarePicker("0", "0")}>
+          <Button onClick={() => handleSquarePicker('0', '0')}>
             <div className="bg-white px-6 py-4 border-2 border-dashed border-[#00000025] hover:border-blue-500 transition duration-500 hover:bg-[#2563EB20]"></div>
           </Button>
-          <Button onClick={() => handleSquarePicker("12", "0")}>
+          <Button onClick={() => handleSquarePicker('12', '0')}>
             <div className="bg-white px-6 py-4 border-2 border-dashed border-[#00000025] hover:border-blue-500 transition duration-500 hover:bg-[#2563EB20]"></div>
           </Button>
-          <Button onClick={() => handleSquarePicker("25", "0")}>
+          <Button onClick={() => handleSquarePicker('25', '0')}>
             <div className="bg-white px-6 py-4 border-2 border-dashed border-[#00000025] hover:border-blue-500 transition duration-500 hover:bg-[#2563EB20]"></div>
           </Button>
         </div>
         <div className="flex items-center justify-between w-[110%] my-1">
-          <Button onClick={() => handleSquarePicker("0", "20")}>
+          <Button onClick={() => handleSquarePicker('0', '20')}>
             <div className="bg-white px-6 py-4 border-2 border-dashed border-[#00000025] hover:border-blue-500 transition duration-500 hover:bg-[#2563EB20]"></div>
           </Button>
-          <Button onClick={() => handleSquarePicker("12", "20")}>
+          <Button onClick={() => handleSquarePicker('12', '20')}>
             <div className="bg-white px-6 py-4 border-2 border-dashed border-[#00000025] hover:border-blue-500 transition duration-500 hover:bg-[#2563EB20]"></div>
           </Button>
-          <Button onClick={() => handleSquarePicker("25", "20")}>
+          <Button onClick={() => handleSquarePicker('25', '20')}>
             <div className="bg-white px-6 py-4 border-2 border-dashed border-[#00000025] hover:border-blue-500 transition duration-500 hover:bg-[#2563EB20]"></div>
           </Button>
         </div>
         <div className="flex items-center justify-between w-[110%] mb-[-15px]">
-          <Button onClick={() => handleSquarePicker("0", "42")}>
+          <Button onClick={() => handleSquarePicker('0', '42')}>
             <div className="bg-white px-6 py-4 border-2 border-dashed border-[#00000025] hover:border-blue-500 transition duration-500 hover:bg-[#2563EB20]"></div>
           </Button>
-          <Button onClick={() => handleSquarePicker("12", "42")}>
+          <Button onClick={() => handleSquarePicker('12', '42')}>
             <div className="bg-white px-6 py-4 border-2 border-dashed border-[#00000025] hover:border-blue-500 transition duration-500 hover:bg-[#2563EB20]"></div>
           </Button>
-          <Button onClick={() => handleSquarePicker("25", "42")}>
+          <Button onClick={() => handleSquarePicker('25', '42')}>
             <div className="bg-white px-6 py-4 border-2 border-dashed border-[#00000025] hover:border-blue-500 transition duration-500 hover:bg-[#2563EB20]"></div>
           </Button>
         </div>
@@ -133,7 +133,7 @@ const Position = ({ data, setData }) => {
               y: 20,
             },
           });
-          toast.success("Position Reseted!");
+          toast.success('Position Reseted!');
         }}
       >
         <div className="bg-[#EEF3F9] text-sm border-2 border-[#00000010] rounded-lg py-2 px-3 font-semibold flex items-center w-min !normal-case">

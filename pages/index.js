@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import { Sidebar, Main, LeftBar } from "../components";
+import React, { useState } from 'react';
+import { Sidebar, Main, LeftBar } from '../components';
 import {
   BrowserView,
   MobileView,
   isBrowser,
   isMobile,
-} from "react-device-detect";
+} from 'react-device-detect';
 
 const App = () => {
   const [imgBlob, setImgBlob] = useState();
   const [children, setChildren] = useState([]);
   const [data, setData] = useState({
     background: {
-      color1: "#00F3FF",
-      color2: "#3524FF",
+      color1: '#00F3FF',
+      color2: '#3524FF',
       direction: 45,
     },
     threeD: {
@@ -31,11 +31,11 @@ const App = () => {
       shadow: 0,
       border: {
         width: 1,
-        color: "#247CD2",
+        color: '#247CD2',
       },
       border_radius: 30,
     },
-    mockup: "normal",
+    mockup: 'normal',
   });
 
   const props = { data, setData, imgBlob, setImgBlob, children, setChildren };
@@ -49,7 +49,7 @@ const App = () => {
             width={37}
             alt="Wave"
             className="mr-2"
-          />{" "}
+          />{' '}
           Iframe
         </h1>
         <p className="text-blue-500 text-semibold mb-1 text-xs">

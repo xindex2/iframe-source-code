@@ -1,7 +1,7 @@
-import { Tooltip } from "@mui/material";
-import React, { useState } from "react";
-import { HexColorPicker } from "react-colorful";
-import toast from "react-hot-toast";
+import { Tooltip } from '@mui/material';
+import React, { useState } from 'react';
+import { HexColorPicker } from 'react-colorful';
+import toast from 'react-hot-toast';
 import {
   FiArrowDown,
   FiArrowLeft,
@@ -28,50 +28,50 @@ import {
   FiUmbrella,
   FiXCircle,
   FiZap,
-} from "react-icons/fi";
-import { Button } from "..";
+} from 'react-icons/fi';
+import { Button } from '..';
 
 const Annotation = ({ children, setChildren }) => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
-  const [color, setColor] = useState("#000000");
+  const [color, setColor] = useState('#000000');
 
   // styles to make the sketchbar pop over
   const popover = {
-    position: "absolute",
-    zIndex: "12",
+    position: 'absolute',
+    zIndex: '12',
   };
   const cover = {
-    position: "fixed",
-    top: "0px",
-    right: "0px",
-    bottom: "0px",
-    left: "0px",
+    position: 'fixed',
+    top: '0px',
+    right: '0px',
+    bottom: '0px',
+    left: '0px',
   };
 
   const shapesArray = [
     {
-      name: "Circle",
+      name: 'Circle',
       icon: <FiCircle className="h-[42px] w-[42px]" style={{ color: color }} />,
       component: (
         <FiCircle className="h-[100%] w-[100%]" style={{ color: color }} />
       ),
     },
     {
-      name: "Heart",
+      name: 'Heart',
       icon: <FiHeart className="h-[42px] w-[42px]" style={{ color: color }} />,
       component: (
         <FiHeart className="h-[100%] w-[100%]" style={{ color: color }} />
       ),
     },
     {
-      name: "Smile",
+      name: 'Smile',
       icon: <FiSmile className="h-[42px] w-[42px]" style={{ color: color }} />,
       component: (
         <FiSmile className="h-[100%] w-[100%]" style={{ color: color }} />
       ),
     },
     {
-      name: "Thumbs Up",
+      name: 'Thumbs Up',
       icon: (
         <FiThumbsUp className="h-[42px] w-[42px]" style={{ color: color }} />
       ),
@@ -80,7 +80,7 @@ const Annotation = ({ children, setChildren }) => {
       ),
     },
     {
-      name: "Thumbs Down",
+      name: 'Thumbs Down',
       icon: (
         <FiThumbsDown className="h-[42px] w-[42px]" style={{ color: color }} />
       ),
@@ -89,14 +89,14 @@ const Annotation = ({ children, setChildren }) => {
       ),
     },
     {
-      name: "Zap",
+      name: 'Zap',
       icon: <FiZap className="h-[42px] w-[42px]" style={{ color: color }} />,
       component: (
         <FiZap className="h-[100%] w-[100%]" style={{ color: color }} />
       ),
     },
     {
-      name: "Triangle",
+      name: 'Triangle',
       icon: (
         <FiTriangle className="h-[42px] w-[42px]" style={{ color: color }} />
       ),
@@ -105,7 +105,7 @@ const Annotation = ({ children, setChildren }) => {
       ),
     },
     {
-      name: "Cross Circle",
+      name: 'Cross Circle',
       icon: (
         <FiXCircle className="h-[42px] w-[42px]" style={{ color: color }} />
       ),
@@ -114,28 +114,28 @@ const Annotation = ({ children, setChildren }) => {
       ),
     },
     {
-      name: "Box",
+      name: 'Box',
       icon: <FiBox className="h-[42px] w-[42px]" style={{ color: color }} />,
       component: (
         <FiBox className="h-[100%] w-[100%]" style={{ color: color }} />
       ),
     },
     {
-      name: "Award",
+      name: 'Award',
       icon: <FiAward className="h-[42px] w-[42px]" style={{ color: color }} />,
       component: (
         <FiAward className="h-[100%] w-[100%]" style={{ color: color }} />
       ),
     },
     {
-      name: "Gift",
+      name: 'Gift',
       icon: <FiGift className="h-[42px] w-[42px]" style={{ color: color }} />,
       component: (
         <FiGift className="h-[100%] w-[100%]" style={{ color: color }} />
       ),
     },
     {
-      name: "Headphones",
+      name: 'Headphones',
       icon: (
         <FiHeadphones className="h-[42px] w-[42px]" style={{ color: color }} />
       ),
@@ -144,21 +144,21 @@ const Annotation = ({ children, setChildren }) => {
       ),
     },
     {
-      name: "Link",
+      name: 'Link',
       icon: <FiLink className="h-[42px] w-[42px]" style={{ color: color }} />,
       component: (
         <FiLink className="h-[100%] w-[100%]" style={{ color: color }} />
       ),
     },
     {
-      name: "Send",
+      name: 'Send',
       icon: <FiSend className="h-[42px] w-[42px]" style={{ color: color }} />,
       component: (
         <FiSend className="h-[100%] w-[100%]" style={{ color: color }} />
       ),
     },
     {
-      name: "Chevrons Down",
+      name: 'Chevrons Down',
       icon: (
         <FiChevronsDown
           className="h-[42px] w-[42px]"
@@ -173,7 +173,7 @@ const Annotation = ({ children, setChildren }) => {
       ),
     },
     {
-      name: "Chevrons Up",
+      name: 'Chevrons Up',
       icon: (
         <FiChevronsUp className="h-[42px] w-[42px]" style={{ color: color }} />
       ),
@@ -182,7 +182,7 @@ const Annotation = ({ children, setChildren }) => {
       ),
     },
     {
-      name: "Chevrons Left",
+      name: 'Chevrons Left',
       icon: (
         <FiChevronsLeft
           className="h-[42px] w-[42px]"
@@ -197,7 +197,7 @@ const Annotation = ({ children, setChildren }) => {
       ),
     },
     {
-      name: "Chevrons Right",
+      name: 'Chevrons Right',
       icon: (
         <FiChevronsRight
           className="h-[42px] w-[42px]"
@@ -212,7 +212,7 @@ const Annotation = ({ children, setChildren }) => {
       ),
     },
     {
-      name: "Arrow Up",
+      name: 'Arrow Up',
       icon: (
         <FiArrowUp className="h-[42px] w-[42px]" style={{ color: color }} />
       ),
@@ -221,7 +221,7 @@ const Annotation = ({ children, setChildren }) => {
       ),
     },
     {
-      name: "Arrow Down",
+      name: 'Arrow Down',
       icon: (
         <FiArrowDown className="h-[42px] w-[42px]" style={{ color: color }} />
       ),
@@ -230,7 +230,7 @@ const Annotation = ({ children, setChildren }) => {
       ),
     },
     {
-      name: "Arrow Right",
+      name: 'Arrow Right',
       icon: (
         <FiArrowRight className="h-[42px] w-[42px]" style={{ color: color }} />
       ),
@@ -239,7 +239,7 @@ const Annotation = ({ children, setChildren }) => {
       ),
     },
     {
-      name: "Arrow Left",
+      name: 'Arrow Left',
       icon: (
         <FiArrowLeft className="h-[42px] w-[42px]" style={{ color: color }} />
       ),
@@ -252,8 +252,8 @@ const Annotation = ({ children, setChildren }) => {
   return (
     <div className="p-7 overflow-x-hidden">
       <div className="flex items-center">
-        <FiPenTool className="text-2xl  text-[#666]" />{" "}
-        <h2 className="text-2xl ml-2 font-[500]  text-[#666]">Annotation</h2>{" "}
+        <FiPenTool className="text-2xl  text-[#666]" />{' '}
+        <h2 className="text-2xl ml-2 font-[500]  text-[#666]">Annotation</h2>{' '}
       </div>
       <div className="bg-[#cccccc] mt-2 rounded-xl w-full h-[1px] mb-6"></div>
       <div className="flex items-center mt-4">

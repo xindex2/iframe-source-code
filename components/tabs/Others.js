@@ -1,30 +1,30 @@
-import { Slider } from "@mui/material";
-import React, { useState } from "react";
-import { HexColorPicker } from "react-colorful";
-import toast from "react-hot-toast";
-import { FiLayers, FiRotateCw } from "react-icons/fi";
-import { Button } from "..";
+import { Slider } from '@mui/material';
+import React, { useState } from 'react';
+import { HexColorPicker } from 'react-colorful';
+import toast from 'react-hot-toast';
+import { FiLayers, FiRotateCw } from 'react-icons/fi';
+import { Button } from '..';
 
 const Other = ({ data, setData }) => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
 
   // styles to make the sketchbar pop over
   const popover = {
-    position: "absolute",
-    zIndex: "12",
+    position: 'absolute',
+    zIndex: '12',
   };
   const cover = {
-    position: "fixed",
-    top: "0px",
-    right: "0px",
-    bottom: "0px",
-    left: "0px",
+    position: 'fixed',
+    top: '0px',
+    right: '0px',
+    bottom: '0px',
+    left: '0px',
   };
   return (
     <div className="p-7 overflow-x-hidden">
       <div className="flex items-center">
-        <FiLayers className="text-2xl  text-[#666]" />{" "}
-        <h2 className="text-2xl ml-2 font-[500]  text-[#666]">Others</h2>{" "}
+        <FiLayers className="text-2xl  text-[#666]" />{' '}
+        <h2 className="text-2xl ml-2 font-[500]  text-[#666]">Others</h2>{' '}
       </div>
       <div className="bg-[#cccccc] mt-2 rounded-xl w-full h-[1px] mb-6"></div>
       <div className="flex items-center mt-4">
@@ -244,12 +244,12 @@ const Other = ({ data, setData }) => {
               shadow: 0,
               border: {
                 width: 1,
-                color: "#247CD2",
+                color: '#247CD2',
               },
               border_radius: 30,
             },
           });
-          toast.success("Reseted all Other Properties!");
+          toast.success('Reseted all Other Properties!');
         }}
       >
         <div className="bg-[#EEF3F9] text-sm border-2 border-[#00000010] rounded-lg py-2 px-3 font-semibold flex items-center !normal-case">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Annotation,
   BackgroundTab,
@@ -8,8 +8,8 @@ import {
   Position,
   Text,
   ThreeD,
-} from "..";
-import { AnimatePresence, motion } from "framer-motion";
+} from '..';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
   FiBox,
   FiLayers,
@@ -18,19 +18,19 @@ import {
   FiSun,
   FiX,
   FiType,
-} from "react-icons/fi";
-import { GoBrowser } from "react-icons/go";
-import { BiPalette } from "react-icons/bi";
-import Tooltip from "@mui/material/Tooltip";
+} from 'react-icons/fi';
+import { GoBrowser } from 'react-icons/go';
+import { BiPalette } from 'react-icons/bi';
+import Tooltip from '@mui/material/Tooltip';
 
 const LeftBar = (props) => {
   const [x, setX] = useState(-350);
-  const [sidebarProperty, setSidebarProperty] = useState("");
+  const [sidebarProperty, setSidebarProperty] = useState('');
 
   const toggleSidebar = (property) => {
     if (property === sidebarProperty) {
       setX(-350);
-      setSidebarProperty("");
+      setSidebarProperty('');
     } else {
       setX(125);
       setSidebarProperty(property);
@@ -39,42 +39,42 @@ const LeftBar = (props) => {
 
   const sidebarProperties = [
     {
-      name: "Mockup",
+      name: 'Mockup',
       icon: (
         <GoBrowser className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />
       ),
     },
     {
-      name: "3d",
+      name: '3d',
       icon: <FiBox className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />,
     },
     {
-      name: "Position",
+      name: 'Position',
       icon: (
         <FiMapPin className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />
       ),
     },
 
     {
-      name: "Other Properties",
+      name: 'Other Properties',
       icon: (
         <FiLayers className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />
       ),
     },
     {
-      name: "Annotation",
+      name: 'Annotation',
       icon: (
         <FiPenTool className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />
       ),
     },
     {
-      name: "Text",
+      name: 'Text',
       icon: (
         <FiType className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />
       ),
     },
     {
-      name: "Background",
+      name: 'Background',
       icon: (
         <BiPalette className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />
       ),
@@ -87,7 +87,7 @@ const LeftBar = (props) => {
           {sidebarProperty && (
             <div
               className="block lg:hidden xl:hidden absolute top-[-50px] left-1/2 transform -translate-x-1/2 rounded-2xl h-fit w-fit"
-              onClick={() => setSidebarProperty("")}
+              onClick={() => setSidebarProperty('')}
             >
               <AnimatePresence>
                 <motion.div
@@ -117,7 +117,7 @@ const LeftBar = (props) => {
               <Tooltip title={property.name} placement="right" arrow>
                 <div
                   className={`p-2 lg:p-3 xl:p-3 bg-[#EEF3F9] rounded-lg border-2 border-[#eee] transition duration-200 text-[#444] ${
-                    sidebarProperty === property.name && "border-blue-500"
+                    sidebarProperty === property.name && 'border-blue-500'
                   }`}
                 >
                   {property.icon}
@@ -126,10 +126,10 @@ const LeftBar = (props) => {
             </Button>
           ))}
         </div>
-        </div>
+      </div>
       {sidebarProperty && (
         <div className="block lg:hidden xl:hidden glassmorphism text-34xl h-full shadow-lg w-full absolute top-0 left-0 z-[10] rounded-[1.5em] overflow-x-hidden">
-          {sidebarProperty === "Background" && (
+          {sidebarProperty === 'Background' && (
             <AnimatePresence>
               <motion.div
                 animate={{ opacity: 1, y: 0 }}
@@ -141,7 +141,7 @@ const LeftBar = (props) => {
               </motion.div>
             </AnimatePresence>
           )}
-          {sidebarProperty === "3d" && (
+          {sidebarProperty === '3d' && (
             <AnimatePresence>
               <motion.div
                 animate={{ opacity: 1, y: 0 }}
@@ -153,7 +153,7 @@ const LeftBar = (props) => {
               </motion.div>
             </AnimatePresence>
           )}
-          {sidebarProperty === "Text" && (
+          {sidebarProperty === 'Text' && (
             <AnimatePresence>
               <motion.div
                 animate={{ opacity: 1, y: 0 }}
@@ -165,7 +165,7 @@ const LeftBar = (props) => {
               </motion.div>
             </AnimatePresence>
           )}
-          {sidebarProperty === "Position" && (
+          {sidebarProperty === 'Position' && (
             <AnimatePresence>
               <motion.div
                 animate={{ opacity: 1, y: 0 }}
@@ -177,7 +177,7 @@ const LeftBar = (props) => {
               </motion.div>
             </AnimatePresence>
           )}
-          {sidebarProperty === "Mockup" && (
+          {sidebarProperty === 'Mockup' && (
             <AnimatePresence>
               <motion.div
                 animate={{ opacity: 1, y: 0 }}
@@ -189,7 +189,7 @@ const LeftBar = (props) => {
               </motion.div>
             </AnimatePresence>
           )}
-          {sidebarProperty === "Other Properties" && (
+          {sidebarProperty === 'Other Properties' && (
             <AnimatePresence>
               <motion.div
                 animate={{ opacity: 1, y: 0 }}
@@ -201,7 +201,7 @@ const LeftBar = (props) => {
               </motion.div>
             </AnimatePresence>
           )}
-          {sidebarProperty === "Annotation" && (
+          {sidebarProperty === 'Annotation' && (
             <AnimatePresence>
               <motion.div
                 animate={{ opacity: 1, y: 0 }}
@@ -225,7 +225,7 @@ const LeftBar = (props) => {
         transition={{ duration: 0.6 }}
         className="hidden lg:block xl:block glassmorphism text-34xl h-[95vh] shadow-lg my-6 w-[35vh] absolute top-0 left-0 z-[10] rounded-[1.5em] overflow-x-hidden"
       >
-        {sidebarProperty === "Background" && (
+        {sidebarProperty === 'Background' && (
           <AnimatePresence>
             <motion.div
               animate={{ opacity: 1, y: 0 }}
@@ -237,7 +237,7 @@ const LeftBar = (props) => {
             </motion.div>
           </AnimatePresence>
         )}
-        {sidebarProperty === "3d" && (
+        {sidebarProperty === '3d' && (
           <AnimatePresence>
             <motion.div
               animate={{ opacity: 1, y: 0 }}
@@ -249,7 +249,7 @@ const LeftBar = (props) => {
             </motion.div>
           </AnimatePresence>
         )}
-        {sidebarProperty === "Text" && (
+        {sidebarProperty === 'Text' && (
           <AnimatePresence>
             <motion.div
               animate={{ opacity: 1, y: 0 }}
@@ -261,7 +261,7 @@ const LeftBar = (props) => {
             </motion.div>
           </AnimatePresence>
         )}
-        {sidebarProperty === "Position" && (
+        {sidebarProperty === 'Position' && (
           <AnimatePresence>
             <motion.div
               animate={{ opacity: 1, y: 0 }}
@@ -273,7 +273,7 @@ const LeftBar = (props) => {
             </motion.div>
           </AnimatePresence>
         )}
-        {sidebarProperty === "Mockup" && (
+        {sidebarProperty === 'Mockup' && (
           <AnimatePresence>
             <motion.div
               animate={{ opacity: 1, y: 0 }}
@@ -285,7 +285,7 @@ const LeftBar = (props) => {
             </motion.div>
           </AnimatePresence>
         )}
-        {sidebarProperty === "Other Properties" && (
+        {sidebarProperty === 'Other Properties' && (
           <AnimatePresence>
             <motion.div
               animate={{ opacity: 1, y: 0 }}
@@ -297,7 +297,7 @@ const LeftBar = (props) => {
             </motion.div>
           </AnimatePresence>
         )}
-        {sidebarProperty === "Annotation" && (
+        {sidebarProperty === 'Annotation' && (
           <AnimatePresence>
             <motion.div
               animate={{ opacity: 1, y: 0 }}
