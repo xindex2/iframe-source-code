@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+/* eslint-disable @next/next/no-img-element */
+import React, { useCallback, useEffect } from 'react';
 import {
   FiArrowDownCircle,
   FiArrowLeft,
@@ -6,7 +7,6 @@ import {
   FiChevronLeft,
   FiChevronRight,
   FiCopy,
-  FiHeart,
   FiHome,
   FiLayout,
   FiMoreVertical,
@@ -15,26 +15,20 @@ import {
   FiUpload,
   FiUploadCloud,
   FiX,
-} from "react-icons/fi";
-import { BsShieldShaded, BsTrophy, BsUpload } from "react-icons/bs";
-import { MdOutlineAccountCircle } from "react-icons/md";
-import { AiOutlineTrophy, AiTwotoneLock } from "react-icons/ai";
-import { FaBars } from "react-icons/fa";
-import { Button, Rnd } from "..";
-import { BiCommand } from "react-icons/bi";
+} from 'react-icons/fi';
+import { BsShieldShaded } from 'react-icons/bs';
+import { MdOutlineAccountCircle } from 'react-icons/md';
+import { AiTwotoneLock } from 'react-icons/ai';
+import { FaBars } from 'react-icons/fa';
+import { Button, Rnd } from '..';
+import { BiCommand } from 'react-icons/bi';
+import Screenshot from './Screenshot';
 
-const Main = ({
-  data,
-  setData,
-  imgBlob,
-  setImgBlob,
-  children,
-  setChildren,
-}) => {
+const Main = ({ data, imgBlob, setImgBlob, children }) => {
   // resize cover image to fit the view
-  const resizeCoverImage = () => {
-    const cover_image = document.querySelector("#cover_image_preview");
-    const container = document.querySelector(".container");
+  const resizeCoverImage = useCallback(() => {
+    const cover_image = document.querySelector('#cover_image_preview');
+    const container = document.querySelector('.container');
 
     // get width and height of cover_image
     const maxWidth = cover_image.offsetWidth;
@@ -48,21 +42,60 @@ const Main = ({
 
     // early exit
     if (width >= maxWidth && height >= maxHeight) {
-      cover_image.style.transform = "";
+      cover_image.style.transform = '';
       return;
     }
 
     scale = Math.min(width / maxWidth, height / maxHeight); // trick to get scale
 
     cover_image.style.transform = `scale(${scale})`; // transform scale applied
-  };
+  }, []);
 
-  // useEffect to control window resize and all
+  const dragOver = useCallback((e) => {
+    e.preventDefault();
+  }, []);
+
+  const dragEnter = useCallback((e) => {
+    e.preventDefault();
+  }, []);
+
+  const dragLeave = useCallback((e) => {
+    e.preventDefault();
+  }, []);
+
+  const handleImageUpload = useCallback(
+    (file) => {
+      var reader = new FileReader();
+      var baseString;
+      reader.onloadend = function () {
+        baseString = reader.result;
+        setImgBlob(baseString);
+      };
+      reader.readAsDataURL(file);
+    },
+    [setImgBlob]
+  );
+
+  const fileDrop = useCallback(
+    (e) => {
+      e.preventDefault();
+      const files = e.dataTransfer.files;
+      if (files.length) {
+        handleImageUpload(files[0]);
+      }
+    },
+    [handleImageUpload]
+  );
+
+  const handleFileSelection = useCallback(
+    (e) => {
+      handleImageUpload(e.target.files[0]);
+    },
+    [handleImageUpload]
+  );
+
+  // Paste clipboard image (if applicable)
   useEffect(() => {
-    resizeCoverImage();
-
-    window.addEventListener("resize", resizeCoverImage);
-
     var IMAGE_MIME_REGEX = /^image\/(p?jpeg|gif|png)$/i;
 
     var loadImage = function (file) {
@@ -83,36 +116,17 @@ const Main = ({
         }
       }
     };
-  });
-  const dragOver = (e) => {
-    e.preventDefault();
-  };
+  }, [setImgBlob]);
 
-  const dragEnter = (e) => {
-    e.preventDefault();
-  };
+  useEffect(() => {
+    resizeCoverImage();
 
-  const dragLeave = (e) => {
-    e.preventDefault();
-  };
+    window.addEventListener('resize', resizeCoverImage);
 
-  const handleImageUpload = (file) => {
-    var reader = new FileReader();
-    var baseString;
-    reader.onloadend = function () {
-      baseString = reader.result;
-      setImgBlob(baseString);
+    return () => {
+      window.removeEventListener('resize', resizeCoverImage);
     };
-    reader.readAsDataURL(file);
-  };
-
-  const fileDrop = (e) => {
-    e.preventDefault();
-    const files = e.dataTransfer.files;
-    if (files.length) {
-      handleImageUpload(files[0]);
-    }
-  };
+  }, [resizeCoverImage]);
 
   return (
     <div className="h-[30vh] lg:h-full xl:h-full w-full lg:w-[71%] xl:w-[71%] relative">
@@ -163,7 +177,7 @@ const Main = ({
                       name="screenshot"
                       id="screenshot"
                       className="hidden"
-                      onChange={(e) => handleImageUpload(e.target.files[0])}
+                      onChange={handleFileSelection}
                       accept="image/png, image/jpeg"
                     />
                     <label
@@ -182,7 +196,7 @@ const Main = ({
                 </div>
               )}
 
-              {data.mockup === "normal" && (
+              {data.mockup === 'normal' && (
                 <div className="px-8 py-6 bg-[#EDF2F7] w-[1800px]">
                   <div className="flex items-center">
                     <div className="rounded-full h-[25px] w-[25px] bg-red-500 mx-2"></div>
@@ -191,7 +205,7 @@ const Main = ({
                   </div>
                 </div>
               )}
-              {data.mockup === "firefox" && (
+              {data.mockup === 'firefox' && (
                 <div className="w-[1800px]">
                   <div className="bg-[#565656] w-full flex items-center pl-8">
                     <div className="my-5 rounded-full h-[25px] w-[25px] bg-red-500 mx-2"></div>
@@ -220,7 +234,7 @@ const Main = ({
                   </div>
                 </div>
               )}
-              {data.mockup === "chrome" && (
+              {data.mockup === 'chrome' && (
                 <div className="w-[1800px]">
                   <div className="bg-[#DFE1E5] w-full flex items-center pl-8">
                     <div className="my-5 rounded-full h-[25px] w-[25px] bg-red-500 mx-2"></div>
@@ -254,7 +268,7 @@ const Main = ({
                   </div>
                 </div>
               )}
-              {data.mockup === "macOS" && (
+              {data.mockup === 'macOS' && (
                 <div className="px-8 py-6 bg-[#EDF2F7] w-[1800px] text-[#666]">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
@@ -281,11 +295,7 @@ const Main = ({
                 </div>
               )}
 
-              <img
-                src={imgBlob ? imgBlob : "/white.png"}
-                alt="Screenshot"
-                className="w-[1800px] border-t border-[#ccc] mt-[-1px]"
-              />
+              <Screenshot imgBlob={imgBlob} />
             </div>
             {children.map((child, key) => (
               <Rnd key={key}>{child.component}</Rnd>
@@ -301,8 +311,8 @@ const Main = ({
             width={37}
             alt="Wave"
             className="mr-2"
-          />{" "}
-          Iframe
+          />
+          {' Iframe'}
         </h1>
         <p className="text-blue-500 text-semibold mb-1 text-xs">
           Turn boring screenshots into <br /> engaging assets

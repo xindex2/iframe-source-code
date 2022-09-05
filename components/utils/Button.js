@@ -1,6 +1,4 @@
-import { Button } from "@mui/material";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 const Btn = ({
   children,
@@ -8,7 +6,7 @@ const Btn = ({
   onClick,
   href,
   scale = 0.8,
-  hoverScale = 1.00,
+  hoverScale = 1.0,
 }) => {
   return (
     <motion.div
