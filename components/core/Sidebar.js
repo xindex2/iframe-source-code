@@ -1,8 +1,7 @@
-import { Tooltip } from '@mui/material';
+/* eslint-disable @next/next/no-img-element */
 import domtoimage from 'dom-to-image';
 import { AnimatePresence, motion } from 'framer-motion';
-import html2canvas from 'html2canvas';
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { BiCommand } from 'react-icons/bi';
 import { FiCopy, FiDownload, FiTwitter, FiUpload } from 'react-icons/fi';
@@ -20,172 +19,118 @@ const canvasStyles = {
   zIndex: 9999999999999,
 };
 
-const Sidebar = ({ imgBlob, setImgBlob, setData, data }) => {
-  const handleImageUpload = (e) => {
-    var reader = new FileReader();
-    var baseString;
-    reader.onloadend = function () {
-      baseString = reader.result;
-      setImgBlob(baseString);
-    };
-    reader.readAsDataURL(e.target.files[0]);
-  };
+const Sidebar = ({ imgBlob, setImgBlob, setData }) => {
+  const refAnimationInstance = useRef(null);
 
-  const addInnerHtml = () => {
+  const templates = useMemo(
+    () => [
+      {
+        func: () =>
+          setData((data) => ({
+            ...data,
+            position: {
+              x: '35',
+              y: '35',
+            },
+            threeD: {
+              x: '0',
+              y: '22',
+              z: '-7',
+            },
+            others: {
+              ...data.others,
+              shadow: '193',
+              scale: '138',
+            },
+          })),
+      },
+      {
+        func: () =>
+          setData((data) => ({
+            ...data,
+            position: {
+              x: '12',
+              y: '20',
+            },
+            threeD: {
+              x: '-34',
+              y: '-23',
+              z: '-5',
+            },
+            others: {
+              ...data.others,
+              shadow: '200',
+              scale: '106',
+            },
+          })),
+      },
+      {
+        func: () =>
+          setData((data) => ({
+            ...data,
+            position: {
+              x: '18',
+              y: '15',
+            },
+            threeD: {
+              x: '32',
+              y: '-7',
+              z: '-3',
+            },
+            others: {
+              ...data.others,
+              shadow: '200',
+              scale: '117',
+            },
+          })),
+      },
+      {
+        func: () =>
+          setData((data) => ({
+            ...data,
+            position: {
+              x: '20',
+              y: '30',
+            },
+            threeD: {
+              x: '-24',
+              y: '-20',
+              z: '11',
+            },
+            others: {
+              ...data.others,
+              shadow: '200',
+              scale: '106',
+            },
+          })),
+      },
+    ],
+    [setData]
+  );
+
+  const getInstance = useCallback((instance) => {
+    refAnimationInstance.current = instance;
+  }, []);
+
+  const handleImageUpload = useCallback(
+    (e) => {
+      var reader = new FileReader();
+      var baseString;
+      reader.onloadend = function () {
+        baseString = reader.result;
+        setImgBlob(baseString);
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    },
+    [setImgBlob]
+  );
+
+  const addInnerHtml = useCallback(() => {
     const coverImage = document.querySelector('#cover_image_download');
 
     coverImage.innerHTML = document.getElementById(
       'cover_image_preview'
     ).innerHTML;
-  };
-
-  // download image as a .png
-  const download = () => {
-    addInnerHtml();
-
-    const downloadImage = domtoimage
-      .toPng(document.querySelector('#cover_image_download'), {
-        height: 1350,
-        width: 2400,
-      })
-      .then(function (dataUrl) {
-        const a = document.createElement('a');
-
-        a.href = dataUrl;
-        a.download = 'screenshot.png';
-        a.click();
-        fire();
-      })
-      .catch(function (error) {
-        console.error('oops, something went wrong!', error);
-      });
-
-    // toasting
-    toast.promise(downloadImage, {
-      loading: 'Saving...',
-      success: `Saved Successfully!`,
-      error: 'Error Saving File',
-    });
-  };
-
-  const copyImage = () => {
-    addInnerHtml();
-
-    const downloadImage = domtoimage
-      .toBlob(document.querySelector('#cover_image_download'), {
-        height: 1350,
-        width: 2400,
-      })
-      .then(function (dataUrl) {
-        navigator.clipboard.write([
-          new ClipboardItem({
-            'image/png': dataUrl,
-          }),
-        ]);
-        fire();
-      })
-      .catch(function (error) {
-        console.error('oops, something went wrong!', error);
-      });
-
-    // toasting
-    toast.promise(downloadImage, {
-      loading: 'Copying...',
-      success: 'Copied Successfully!',
-      error: 'Error Saving File',
-    });
-  };
-
-  useHotkeys('ctrl+c', () => copyImage());
-  useHotkeys('ctrl+m', () => download());
-
-  const templates = [
-    {
-      func: () =>
-        setData({
-          ...data,
-          position: {
-            x: '35',
-            y: '35',
-          },
-          threeD: {
-            x: '0',
-            y: '22',
-            z: '-7',
-          },
-          others: {
-            ...data.others,
-            shadow: '193',
-            scale: '138',
-          },
-        }),
-    },
-    {
-      func: () =>
-        setData({
-          ...data,
-          position: {
-            x: '12',
-            y: '20',
-          },
-          threeD: {
-            x: '-34',
-            y: '-23',
-            z: '-5',
-          },
-          others: {
-            ...data.others,
-            shadow: '200',
-            scale: '106',
-          },
-        }),
-    },
-    {
-      func: () =>
-        setData({
-          ...data,
-          position: {
-            x: '18',
-            y: '15',
-          },
-          threeD: {
-            x: '32',
-            y: '-7',
-            z: '-3',
-          },
-          others: {
-            ...data.others,
-            shadow: '200',
-            scale: '117',
-          },
-        }),
-    },
-    {
-      func: () =>
-        setData({
-          ...data,
-          position: {
-            x: '20',
-            y: '30',
-          },
-          threeD: {
-            x: '-24',
-            y: '-20',
-            z: '11',
-          },
-          others: {
-            ...data.others,
-            shadow: '200',
-            scale: '106',
-          },
-        }),
-    },
-  ];
-
-  const refAnimationInstance = useRef(null);
-
-  const getInstance = useCallback((instance) => {
-    refAnimationInstance.current = instance;
   }, []);
 
   const makeShot = useCallback((particleRatio, opts) => {
@@ -225,6 +170,66 @@ const Sidebar = ({ imgBlob, setImgBlob, setData, data }) => {
       startVelocity: 45,
     });
   }, [makeShot]);
+
+  // download image as a .png
+  const download = useCallback(() => {
+    addInnerHtml();
+
+    const downloadImage = domtoimage
+      .toPng(document.querySelector('#cover_image_download'), {
+        height: 1350,
+        width: 2400,
+      })
+      .then(function (dataUrl) {
+        const a = document.createElement('a');
+
+        a.href = dataUrl;
+        a.download = 'screenshot.png';
+        a.click();
+        fire();
+      })
+      .catch(function (error) {
+        console.error('oops, something went wrong!', error);
+      });
+
+    // toasting
+    toast.promise(downloadImage, {
+      loading: 'Saving...',
+      success: `Saved Successfully!`,
+      error: 'Error Saving File',
+    });
+  }, [addInnerHtml, fire]);
+
+  const copyImage = useCallback(() => {
+    addInnerHtml();
+
+    const downloadImage = domtoimage
+      .toBlob(document.querySelector('#cover_image_download'), {
+        height: 1350,
+        width: 2400,
+      })
+      .then(function (dataUrl) {
+        navigator.clipboard.write([
+          new ClipboardItem({
+            'image/png': dataUrl,
+          }),
+        ]);
+        fire();
+      })
+      .catch(function (error) {
+        console.error('oops, something went wrong!', error);
+      });
+
+    // toasting
+    toast.promise(downloadImage, {
+      loading: 'Copying...',
+      success: 'Copied Successfully!',
+      error: 'Error Saving File',
+    });
+  }, [addInnerHtml, fire]);
+
+  useHotkeys('ctrl+c', () => copyImage());
+  useHotkeys('ctrl+m', () => download());
 
   return (
     <div className="h-full w-full lg:w-[22%] p-6">

@@ -1,11 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from 'react';
 import { Sidebar, Main, LeftBar } from '../components';
-import {
-  BrowserView,
-  MobileView,
-  isBrowser,
-  isMobile,
-} from 'react-device-detect';
 
 const App = () => {
   const [imgBlob, setImgBlob] = useState();
@@ -39,6 +34,7 @@ const App = () => {
   });
 
   const props = { data, setData, imgBlob, setImgBlob, children, setChildren };
+
   return (
     <div className="bg-[#ECF2F5] lg:h-screen xl:h-screen w-screen overflow-hidden flex lg:flex-row xl:flex-row flex-col text-[#444] pb-16 lg:pb-0 xl:pb-0">
       <div className="block lg:hidden xl:hidden pt-6 px-6">

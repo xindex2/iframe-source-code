@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   Annotation,
   BackgroundTab,
@@ -15,7 +15,6 @@ import {
   FiLayers,
   FiMapPin,
   FiPenTool,
-  FiSun,
   FiX,
   FiType,
 } from 'react-icons/fi';
@@ -23,63 +22,89 @@ import { GoBrowser } from 'react-icons/go';
 import { BiPalette } from 'react-icons/bi';
 import Tooltip from '@mui/material/Tooltip';
 
+const sidebarProperties = [
+  {
+    name: 'Mockup',
+    icon: (
+      <GoBrowser className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />
+    ),
+  },
+  {
+    name: '3d',
+    icon: <FiBox className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />,
+  },
+  {
+    name: 'Position',
+    icon: (
+      <FiMapPin className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />
+    ),
+  },
+
+  {
+    name: 'Other Properties',
+    icon: (
+      <FiLayers className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />
+    ),
+  },
+  {
+    name: 'Annotation',
+    icon: (
+      <FiPenTool className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />
+    ),
+  },
+  {
+    name: 'Text',
+    icon: <FiType className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />,
+  },
+  {
+    name: 'Background',
+    icon: (
+      <BiPalette className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />
+    ),
+  },
+];
+
+const Property = ({ name, icon, isSelected, onClick }) => {
+  const handleClick = useCallback(() => {
+    onClick(name);
+  }, [name, onClick]);
+
+  return (
+    <Button className="!block !my-2" onClick={handleClick} hoverScale={1.1}>
+      <Tooltip title={name} placement="right" arrow>
+        <div
+          className={`p-2 lg:p-3 xl:p-3 bg-[#EEF3F9] rounded-lg border-2 border-[#eee] transition duration-200 text-[#444] ${
+            isSelected && 'border-blue-500'
+          }`}
+        >
+          {icon}
+        </div>
+      </Tooltip>
+    </Button>
+  );
+};
+
 const LeftBar = (props) => {
   const [x, setX] = useState(-350);
   const [sidebarProperty, setSidebarProperty] = useState('');
 
-  const toggleSidebar = (property) => {
-    if (property === sidebarProperty) {
-      setX(-350);
-      setSidebarProperty('');
-    } else {
-      setX(125);
-      setSidebarProperty(property);
-    }
-  };
+  const handleClose = useCallback(() => {
+    setSidebarProperty('');
+  }, []);
 
-  const sidebarProperties = [
-    {
-      name: 'Mockup',
-      icon: (
-        <GoBrowser className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />
-      ),
+  const toggleSidebar = useCallback(
+    (property) => {
+      if (property === sidebarProperty) {
+        setX(-350);
+        setSidebarProperty('');
+      } else {
+        setX(125);
+        setSidebarProperty(property);
+      }
     },
-    {
-      name: '3d',
-      icon: <FiBox className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />,
-    },
-    {
-      name: 'Position',
-      icon: (
-        <FiMapPin className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />
-      ),
-    },
+    [sidebarProperty]
+  );
 
-    {
-      name: 'Other Properties',
-      icon: (
-        <FiLayers className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />
-      ),
-    },
-    {
-      name: 'Annotation',
-      icon: (
-        <FiPenTool className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />
-      ),
-    },
-    {
-      name: 'Text',
-      icon: (
-        <FiType className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />
-      ),
-    },
-    {
-      name: 'Background',
-      icon: (
-        <BiPalette className="text-lg xl:text-2xl lg:text-2xl text-gray-700" />
-      ),
-    },
-  ];
   return (
     <>
       <div className="w-full lg:w-[7%] xl:w-[7%] min-w-[130px] h-0 lg:h-full xl:h-full lg:p-6 xl:p-6 relative z-[15]">
@@ -87,7 +112,7 @@ const LeftBar = (props) => {
           {sidebarProperty && (
             <div
               className="block lg:hidden xl:hidden absolute top-[-50px] left-1/2 transform -translate-x-1/2 rounded-2xl h-fit w-fit"
-              onClick={() => setSidebarProperty('')}
+              onClick={handleClose}
             >
               <AnimatePresence>
                 <motion.div
@@ -107,23 +132,14 @@ const LeftBar = (props) => {
               </AnimatePresence>
             </div>
           )}
-          {sidebarProperties.map((property, index) => (
-            <Button
-              className="!block !my-2"
-              key={index}
-              onClick={() => toggleSidebar(property.name)}
-              hoverScale={1.1}
-            >
-              <Tooltip title={property.name} placement="right" arrow>
-                <div
-                  className={`p-2 lg:p-3 xl:p-3 bg-[#EEF3F9] rounded-lg border-2 border-[#eee] transition duration-200 text-[#444] ${
-                    sidebarProperty === property.name && 'border-blue-500'
-                  }`}
-                >
-                  {property.icon}
-                </div>
-              </Tooltip>
-            </Button>
+          {sidebarProperties.map((property) => (
+            <Property
+              key={property.name}
+              name={property.name}
+              icon={property.icon}
+              isSelected={property.name === sidebarProperty}
+              onClick={toggleSidebar}
+            />
           ))}
         </div>
       </div>

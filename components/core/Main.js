@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+/* eslint-disable @next/next/no-img-element */
+import React, { useCallback, useEffect } from 'react';
 import {
   FiArrowDownCircle,
   FiArrowLeft,
@@ -6,7 +7,6 @@ import {
   FiChevronLeft,
   FiChevronRight,
   FiCopy,
-  FiHeart,
   FiHome,
   FiLayout,
   FiMoreVertical,
@@ -16,23 +16,17 @@ import {
   FiUploadCloud,
   FiX,
 } from 'react-icons/fi';
-import { BsShieldShaded, BsTrophy, BsUpload } from 'react-icons/bs';
+import { BsShieldShaded } from 'react-icons/bs';
 import { MdOutlineAccountCircle } from 'react-icons/md';
-import { AiOutlineTrophy, AiTwotoneLock } from 'react-icons/ai';
+import { AiTwotoneLock } from 'react-icons/ai';
 import { FaBars } from 'react-icons/fa';
 import { Button, Rnd } from '..';
 import { BiCommand } from 'react-icons/bi';
+import Screenshot from './Screenshot';
 
-const Main = ({
-  data,
-  setData,
-  imgBlob,
-  setImgBlob,
-  children,
-  setChildren,
-}) => {
+const Main = ({ data, imgBlob, setImgBlob, children }) => {
   // resize cover image to fit the view
-  const resizeCoverImage = () => {
+  const resizeCoverImage = useCallback(() => {
     const cover_image = document.querySelector('#cover_image_preview');
     const container = document.querySelector('.container');
 
@@ -55,14 +49,53 @@ const Main = ({
     scale = Math.min(width / maxWidth, height / maxHeight); // trick to get scale
 
     cover_image.style.transform = `scale(${scale})`; // transform scale applied
-  };
+  }, []);
 
-  // useEffect to control window resize and all
+  const dragOver = useCallback((e) => {
+    e.preventDefault();
+  }, []);
+
+  const dragEnter = useCallback((e) => {
+    e.preventDefault();
+  }, []);
+
+  const dragLeave = useCallback((e) => {
+    e.preventDefault();
+  }, []);
+
+  const handleImageUpload = useCallback(
+    (file) => {
+      var reader = new FileReader();
+      var baseString;
+      reader.onloadend = function () {
+        baseString = reader.result;
+        setImgBlob(baseString);
+      };
+      reader.readAsDataURL(file);
+    },
+    [setImgBlob]
+  );
+
+  const fileDrop = useCallback(
+    (e) => {
+      e.preventDefault();
+      const files = e.dataTransfer.files;
+      if (files.length) {
+        handleImageUpload(files[0]);
+      }
+    },
+    [handleImageUpload]
+  );
+
+  const handleFileSelection = useCallback(
+    (e) => {
+      handleImageUpload(e.target.files[0]);
+    },
+    [handleImageUpload]
+  );
+
+  // Paste clipboard image (if applicable)
   useEffect(() => {
-    resizeCoverImage();
-
-    window.addEventListener('resize', resizeCoverImage);
-
     var IMAGE_MIME_REGEX = /^image\/(p?jpeg|gif|png)$/i;
 
     var loadImage = function (file) {
@@ -83,36 +116,17 @@ const Main = ({
         }
       }
     };
-  });
-  const dragOver = (e) => {
-    e.preventDefault();
-  };
+  }, [setImgBlob]);
 
-  const dragEnter = (e) => {
-    e.preventDefault();
-  };
+  useEffect(() => {
+    resizeCoverImage();
 
-  const dragLeave = (e) => {
-    e.preventDefault();
-  };
+    window.addEventListener('resize', resizeCoverImage);
 
-  const handleImageUpload = (file) => {
-    var reader = new FileReader();
-    var baseString;
-    reader.onloadend = function () {
-      baseString = reader.result;
-      setImgBlob(baseString);
+    return () => {
+      window.removeEventListener('resize', resizeCoverImage);
     };
-    reader.readAsDataURL(file);
-  };
-
-  const fileDrop = (e) => {
-    e.preventDefault();
-    const files = e.dataTransfer.files;
-    if (files.length) {
-      handleImageUpload(files[0]);
-    }
-  };
+  }, [resizeCoverImage]);
 
   return (
     <div className="h-[30vh] lg:h-full xl:h-full w-full lg:w-[71%] xl:w-[71%] relative">
@@ -163,7 +177,7 @@ const Main = ({
                       name="screenshot"
                       id="screenshot"
                       className="hidden"
-                      onChange={(e) => handleImageUpload(e.target.files[0])}
+                      onChange={handleFileSelection}
                       accept="image/png, image/jpeg"
                     />
                     <label
@@ -281,11 +295,7 @@ const Main = ({
                 </div>
               )}
 
-              <img
-                src={imgBlob ? imgBlob : '/white.png'}
-                alt="Screenshot"
-                className="w-[1800px] border-t border-[#ccc] mt-[-1px]"
-              />
+              <Screenshot imgBlob={imgBlob} />
             </div>
             {children.map((child, key) => (
               <Rnd key={key}>{child.component}</Rnd>
@@ -301,8 +311,8 @@ const Main = ({
             width={37}
             alt="Wave"
             className="mr-2"
-          />{' '}
-          Iframe
+          />
+          {' Iframe'}
         </h1>
         <p className="text-blue-500 text-semibold mb-1 text-xs">
           Turn boring screenshots into <br /> engaging assets
